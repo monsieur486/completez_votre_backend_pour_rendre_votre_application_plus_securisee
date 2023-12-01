@@ -1,8 +1,7 @@
 package com.nnk.springboot.domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import java.sql.Timestamp;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rulename")

@@ -1,12 +1,7 @@
 package com.nnk.springboot.domain;
 
-import org.springframework.beans.factory.annotation.Required;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import java.sql.Date;
-import java.sql.Timestamp;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "bidlist")
