@@ -1,2 +1,0 @@
-INSERT INTO USERS(fullname, username, password, role) values('Administrator', 'admin', '$2a$10$tVW01BEaQ/KHuyOQPeFlQe1jJjfrrxF3JZloFC62KZ7dROUWBdqIW', 'ADMIN');
-INSERT INTO USERS(fullname, username, password, role) values('User', 'user', '$2a$10$tVW01BEaQ/KHuyOQPeFlQe1jJjfrrxF3JZloFC62KZ7dROUWBdqIW', 'USER');
