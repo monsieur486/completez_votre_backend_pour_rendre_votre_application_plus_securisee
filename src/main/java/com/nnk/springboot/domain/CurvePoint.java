@@ -15,5 +15,27 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Table(name = "curvepoint")
 public class CurvePoint {
-    // TODO: Map columns in data table CURVEPOINT with corresponding java fields
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private Integer curveId;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp asOfDate;
+
+    private Double term;
+
+    private Double pointValue;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp creationDate;
+
+    public CurvePoint(int curveId, double term, double value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.pointValue = value;
+    }
+
 }
