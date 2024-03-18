@@ -1,21 +1,20 @@
 package com.nnk.springboot.service;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.springframework.stereotype.Service;
-
-import com.nnk.springboot.domain.BidList;
 
 @Service
 public class BidListService {
 
-    private BidListRepository bidListRepository;
+    private final BidListRepository bidListRepository;
 
 
     public BidListService(BidListRepository bidListRepository) {
         this.bidListRepository = bidListRepository;
     }
 
-    public BidList findBidListById(Integer id){
+    public BidList findBidListById(Integer id) {
         return bidListRepository.findById(id).orElse(null);
     }
 

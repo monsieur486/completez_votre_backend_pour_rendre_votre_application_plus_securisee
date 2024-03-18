@@ -29,7 +29,7 @@ public class BidList {
     @Column(nullable = false, length = 30)
     private String type;
 
-    @Min(value=1, message = "Bid Quantity must be greater than 1")
+    @Min(value = 1, message = "Bid Quantity must be greater than 1")
     private Double bidQuantity;
 
     private Double askQuantity;
