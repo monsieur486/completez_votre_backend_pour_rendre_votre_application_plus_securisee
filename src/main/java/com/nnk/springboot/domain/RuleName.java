@@ -13,5 +13,35 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "rulename")
 public class RuleName {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(length = 125)
+    private String name;
+
+    @Column(length = 125)
+    private String description;
+
+    @Column(length = 125)
+    private String json;
+
+    @Column(length = 512)
+    private String template;
+
+    @Column(length = 125)
+    private String sqlStr;
+
+    @Column(length = 125)
+    private String sqlPart;
+
+    public RuleName(String ruleName, String description, String json, String template, String sql, String sqlPart) {
+        this.name = ruleName;
+        this.description = description;
+        this.json = json;
+        this.template = template;
+        this.sqlStr = sql;
+        this.sqlPart = sqlPart;
+    }
 }
