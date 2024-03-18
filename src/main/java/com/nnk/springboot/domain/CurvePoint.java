@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -30,6 +31,7 @@ public class CurvePoint {
     private Double pointValue;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Timestamp creationDate;
 
     public CurvePoint(int curveId, double term, double value) {
