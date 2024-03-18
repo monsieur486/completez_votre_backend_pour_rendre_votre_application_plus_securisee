@@ -16,5 +16,69 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Table(name = "trade")
 public class Trade {
-    // TODO: Map columns in data table TRADE with corresponding java fields
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer tradeId;
+
+    @Column(nullable = false, length = 30)
+    private String account;
+
+    @Column(nullable = false, length = 30)
+    private String type;
+
+    private Double buyQuantity;
+
+    private Double sellQuantity;
+
+    private Double buyPrice;
+
+    private Double sellPrice;
+
+    @Column(length = 125)
+    private String benchmark;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp tradeDate;
+
+    @Column(length = 125)
+    private String security;
+
+    @Column(length = 10)
+    private String status;
+
+    @Column(length = 125)
+    private String trader;
+
+    @Column(length = 125)
+    private String book;
+
+    @Column(length = 125)
+    private String creationName;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp creationDate;
+
+    @Column(length = 125)
+    private String revisionName;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp revisionDate;
+
+    @Column(length = 125)
+    private String dealName;
+
+    @Column(length = 125)
+    private String dealType;
+
+    @Column(length = 125)
+    private String sourceListId;
+
+    @Column(length = 125)
+    private String side;
+
+    public Trade(String tradeAccount, String type) {
+        this.account = tradeAccount;
+        this.type = type;
+    }
 }
