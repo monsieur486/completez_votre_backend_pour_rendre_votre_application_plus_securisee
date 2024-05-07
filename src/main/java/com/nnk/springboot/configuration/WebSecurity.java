@@ -7,7 +7,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -40,23 +39,27 @@ public class WebSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        http
                 .authorizeHttpRequests(req -> {
+                    req.requestMatchers(new AntPathRequestMatcher("/")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/app/**")).permitAll();
-                    req.requestMatchers(new AntPathRequestMatcher("/login")).permitAll();
-                    req.requestMatchers(new AntPathRequestMatcher("/bidList/**")).hasRole("USER");
-                    req.requestMatchers(new AntPathRequestMatcher("/rating/**")).hasRole("USER");
-                    req.requestMatchers(new AntPathRequestMatcher("/ruleName/**")).hasRole("USER");
-                    req.requestMatchers(new AntPathRequestMatcher("/trade/**")).hasRole("USER");
-                    req.requestMatchers(new AntPathRequestMatcher("/curvePoint/**")).hasRole("USER");
                     req.requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("ADMIN");
                     req.anyRequest().authenticated();
                 })
-                .formLogin(withDefaults())
-                .logout(logout -> logout.logoutSuccessUrl("/login"))
+                .exceptionHandling(e -> e
+                        .accessDeniedPage("/app/error")
+                )
+                .formLogin(form -> form
+                        .loginPage("/app/login")
+                        .defaultSuccessUrl("/bidList/list")
+                )
+                .logout(logout -> logout.logoutSuccessUrl("/app/login")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                )
                 .httpBasic(withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
-                .build();
+                .csrf(AbstractHttpConfigurer::disable);
+        return http.build();
     }
 }

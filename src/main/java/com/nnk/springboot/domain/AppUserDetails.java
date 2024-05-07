@@ -50,5 +50,9 @@ public class AppUserDetails implements UserDetails {
         return true;
     }
 
+    public String getFullname() {
+        return user.getFullname();
+    }
+
 
 }
