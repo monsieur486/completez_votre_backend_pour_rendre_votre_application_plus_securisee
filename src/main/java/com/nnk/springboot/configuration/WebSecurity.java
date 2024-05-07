@@ -7,6 +7,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -42,6 +43,7 @@ public class WebSecurity {
         http
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(new AntPathRequestMatcher("/")).permitAll();
+                    req.requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/app/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("ADMIN");
@@ -59,7 +61,9 @@ public class WebSecurity {
                         .deleteCookies("JSESSIONID")
                 )
                 .httpBasic(withDefaults())
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(AbstractHttpConfigurer::disable)
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+        ;
         return http.build();
     }
 }
