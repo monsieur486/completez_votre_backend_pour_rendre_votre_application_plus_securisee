@@ -7,7 +7,7 @@
 <h3>Access Denied Exception</h3>
 <div>
     <div sec:authorize="isAuthenticated()">Logged in user: <b><span sec:authentication="name"></span></b></div>
-    <form th:action="@{/logout}" method="POST">
+    <form method="POST" th:action="@{/logout}">
         <input type="submit" value="Logout"/>
     </form>
 </div>
