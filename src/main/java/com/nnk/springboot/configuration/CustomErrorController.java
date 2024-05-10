@@ -26,10 +26,6 @@ public class CustomErrorController implements ErrorController {
             } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
                 // handle HTTP 403 Forbidden error
                 return "error/403";
-
-            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                // handle HTTP 500 Internal Server error
-                return "error/500";
             }
         }
 
