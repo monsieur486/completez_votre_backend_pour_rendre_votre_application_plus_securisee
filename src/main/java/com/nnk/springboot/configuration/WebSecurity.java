@@ -44,14 +44,12 @@ public class WebSecurity {
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(new AntPathRequestMatcher("/")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll();
+                    req.requestMatchers(new AntPathRequestMatcher("/error/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/app/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("ADMIN");
                     req.anyRequest().authenticated();
                 })
-                .exceptionHandling(e -> e
-                        .accessDeniedPage("/app/error")
-                )
                 .formLogin(form -> form
                         .loginPage("/app/login")
                         .defaultSuccessUrl("/bidList/list")

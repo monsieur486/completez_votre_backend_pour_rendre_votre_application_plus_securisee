@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Boot</title>
 </head>
@@ -11,6 +14,6 @@
         <input type="submit" value="Logout"/>
     </form>
 </div>
-<p class="error" th:text="${errorMsg}">Error</p>
+<p class="error">You are not authorized for the requested data.</p>
 </body>
 </html>
