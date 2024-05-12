@@ -1,6 +1,5 @@
 package com.nnk.springboot.configuration;
 
-import com.nnk.springboot.domain.Privilege;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDto;
 import com.nnk.springboot.service.PrivilegeService;
@@ -36,15 +35,16 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Value("${USER_PASSWORD}")
     public String userPassword;
-    private boolean alreadySetup = false;
+
     @Value("${spring.profiles.active}")
     private String activeProfile;
+
+    private boolean alreadySetup = false;
 
     public SetupDataLoader(UserService userService, PrivilegeService privilegeService) {
         this.userService = userService;
         this.privilegeService = privilegeService;
     }
-
 
     @Override
     @Transactional
