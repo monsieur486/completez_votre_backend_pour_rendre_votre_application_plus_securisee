@@ -47,7 +47,7 @@ public class WebSecurity {
                     req.requestMatchers(new AntPathRequestMatcher("/error/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/app/**")).permitAll();
-                    req.requestMatchers(new AntPathRequestMatcher("/user/**")).hasRole("ADMIN");
+                    req.requestMatchers(new AntPathRequestMatcher("/user/**")).hasAuthority("USER_MANAGEMENT");
                     req.anyRequest().authenticated();
                 })
                 .formLogin(form -> form

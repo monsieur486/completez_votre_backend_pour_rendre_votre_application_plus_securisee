@@ -13,7 +13,7 @@
     <div th:replace="~{fragments/menu :: menu}"></div>
     <div class="row"><h2>User List</h2></div>
     <div class="row">
-        <a sec:authorize="hasAuthority('ADD_PRIVILEGE')" class="btn btn-primary btn-sm" href="/user/add">Add New</a>
+        <a sec:authorize="hasAuthority('USER_MANAGEMENT')" class="btn btn-primary btn-sm" href="/user/add">Add New</a>
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -31,8 +31,10 @@
                 <td th:text="${user.username}"></td>
                 <td style="width: 25%" th:text="${user.role}"></td>
                 <td class="text-center" style="width: 15%">
-                    <a th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
+                    <a sec:authorize="hasAuthority('USER_MANAGEMENT')"
+                       th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>&nbsp;|&nbsp;
+                    <a sec:authorize="hasAuthority('USER_MANAGEMENT')"
+                       th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>

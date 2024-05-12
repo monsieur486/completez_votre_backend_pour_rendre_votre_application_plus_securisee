@@ -10,7 +10,7 @@
 <div class="container">
     <h3> HOME PAGE </h3>
     <a href="/app/login">Login</a>
-    <div sec:authorize="hasRole('ADMIN')"> or create one <a href="/user/list">User management</a></div>
+    <div sec:authorize="hasAuthority('USER_MANAGEMENT')"> or create one <a href="/user/list">User management</a></div>
 </div>
 </body>
 </html>

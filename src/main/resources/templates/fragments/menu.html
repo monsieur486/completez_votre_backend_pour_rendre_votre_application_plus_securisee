@@ -11,7 +11,7 @@
             <a sec:authorize="isAuthenticated()" href="/rating/list">Ratings</a>
             <a sec:authorize="isAuthenticated()" href="/trade/list">Trade</a>
             <a sec:authorize="isAuthenticated()" href="/ruleName/list">Rule</a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/list">Users</a>
+            <a sec:authorize="hasAuthority('USER_MANAGEMENT')" href="/user/list">Users</a>
         </div>
         <div class="col-6 text-right">
             <div sec:authorize="isAuthenticated()">Logged in user: <b><span sec:authentication="name"></span></b>
