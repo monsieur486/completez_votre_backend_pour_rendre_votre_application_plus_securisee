@@ -6,28 +6,14 @@
 <head>
     <meta charset="utf-8"/>
     <title>Home</title>
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-6">
-            <a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
-            <a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
-            <a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
-            <a href="/trade/list">Trade</a>&nbsp;|&nbsp;
-            <a href="/ruleName/list">Rule</a>
-        </div>
-        <div class="col-6 text-right">
-            <div sec:authorize="isAuthenticated()">Logged in user: <b><span sec:authentication="name"></span></b></div>
-            <form method="POST" th:action="@{/logout}">
-                <input type="submit" value="Logout"/>
-            </form>
-        </div>
-    </div>
+    <div th:replace="~{fragments/menu :: menu}"></div>
     <div class="row"><h2>Bid List</h2></div>
     <div class="row">
-        <a class="btn btn-primary btn-sm" href="/bidList/add">Add New</a>
+        <a sec:authorize="hasAuthority('ADD_PRIVILEGE')" class="btn btn-primary btn-sm" href="/bidList/add">Add New</a>
         <table class="table table-bordered">
             <thead>
             <tr>

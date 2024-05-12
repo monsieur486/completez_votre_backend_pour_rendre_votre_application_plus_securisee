@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Boot</title>
+    <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 <body>
-<h3>Not found</h3>
-<div>
-    <div sec:authorize="isAuthenticated()">Logged in user: <b><span sec:authentication="name"></span></b></div>
-</div>
-<p class="error">The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+    <div class="container">
+        <h3>Not found</h3>
+        <div>
+            <div th:replace="~{fragments/menu :: menu}"></div>
+        </div>
+        <p class="error">The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+    </div>
 </body>
 </html>

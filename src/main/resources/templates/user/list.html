@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>Home</title>
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-6">
-
-        </div>
-        <div class="col-6 text-right">
-            <a href="/">Home</a>&nbsp;|&nbsp;<a href="/logout">Logout</a>
-        </div>
-    </div>
+    <div th:replace="~{fragments/menu :: menu}"></div>
     <div class="row"><h2>User List</h2></div>
     <div class="row">
-        <a class="btn btn-primary btn-sm" href="/user/add">Add New</a>
+        <a sec:authorize="hasAuthority('ADD_PRIVILEGE')" class="btn btn-primary btn-sm" href="/user/add">Add New</a>
         <table class="table table-bordered">
             <thead>
             <tr>

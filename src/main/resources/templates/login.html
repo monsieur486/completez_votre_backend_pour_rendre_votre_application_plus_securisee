@@ -2,15 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title> Spring Boot </title>
-    <link href="/css/styles.css" rel="stylesheet"/>
+    <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 <body>
-<h3> Custom Login Page </h3>
-<form method="post" th:action="@{/app/login}">
-    <label for="username">Username</label>: <input autofocus="autofocus"
-                                                   id="username" name="username" type="text"/> <label
-        for="password">Password</label>: <input id="password" name="password"
-                                                type="password"/><input type="submit" value="Log in"/>
-</form>
+<div class="container">
+    <h3> Custom Login Page </h3>
+    <a href="/">Home</a>
+    <div th:if="${param.error}">
+        <div class="error">Invalid username and password.</div>
+    </div>
+    <form method="post" th:action="@{/app/login}">
+        <label for="username">Username</label>: <input autofocus="autofocus"
+                                                       id="username" name="username" type="text"/> <label
+            for="password">Password</label>: <input id="password" name="password"
+                                                    type="password"/><input type="submit" value="Log in"/>
+    </form>
+</div>
 </body>
 </html>

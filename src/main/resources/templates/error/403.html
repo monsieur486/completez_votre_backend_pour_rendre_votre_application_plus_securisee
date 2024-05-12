@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Spring Boot</title>
+    <div th:replace="~{fragments/header :: header-css}"></div>
 </head>
 <body>
-<h3>Access Denied Exception</h3>
-<div>
-    <div sec:authorize="isAuthenticated()">Logged in user: <b><span sec:authentication="name"></span></b></div>
-    <form method="POST" th:action="@{/logout}">
-        <input type="submit" value="Logout"/>
-    </form>
-</div>
-<p class="error">You are not authorized for the requested data.</p>
+    <div class="container">
+        <h3>Access Denied Exception</h3>
+        <div>
+            <div th:replace="~{fragments/menu :: menu}"></div>
+        </div>
+        <p class="error">You are not authorized for the requested data.</p>
+    </div>
 </body>
 </html>

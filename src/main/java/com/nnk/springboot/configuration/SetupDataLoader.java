@@ -1,7 +1,9 @@
 package com.nnk.springboot.configuration;
 
+import com.nnk.springboot.domain.Privilege;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDto;
+import com.nnk.springboot.service.PrivilegeService;
 import com.nnk.springboot.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Component;
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserService userService;
+    private final PrivilegeService privilegeService;
+
     @Value("${ADMIN_USERNAME}")
     public String adminUsername;
 
@@ -36,8 +40,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Value("${spring.profiles.active}")
     private String activeProfile;
 
-    public SetupDataLoader(UserService userService) {
+    public SetupDataLoader(UserService userService, PrivilegeService privilegeService) {
         this.userService = userService;
+        this.privilegeService = privilegeService;
     }
 
 
@@ -55,6 +60,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             createUserIfNotFound(userUsername, userFullname, userPassword, "USER");
         }
 
+        createPrivilegeIfNotFound("ADMIN", "ADD_PRIVILEGE");
+        createPrivilegeIfNotFound("ADMIN", "UPDATE_PRIVILEGE");
+        createPrivilegeIfNotFound("ADMIN", "DELETE_PRIVILEGE");
+
         alreadySetup = true;
     }
 
@@ -70,6 +79,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             UserDto userDto = new UserDto(username, fullname, password, role);
             userService.saveUserDto(userDto);
         }
+    }
+
+    private void createPrivilegeIfNotFound(String role, String name) {
+        privilegeService.createIfNotFound(role, name);
     }
 
 }

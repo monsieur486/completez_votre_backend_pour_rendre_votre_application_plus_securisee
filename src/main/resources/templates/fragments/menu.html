@@ -1,0 +1,25 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu">
+    <div class="row">
+        <div class="col-6">
+            <a href="/">Home</a>
+            <a sec:authorize="isAuthenticated()" href="/bidList/list">Bid List</a>
+            <a sec:authorize="isAuthenticated()" href="/curvePoint/list">Curve Points</a>
+            <a sec:authorize="isAuthenticated()" href="/rating/list">Ratings</a>
+            <a sec:authorize="isAuthenticated()" href="/trade/list">Trade</a>
+            <a sec:authorize="isAuthenticated()" href="/ruleName/list">Rule</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" href="/user/list">Users</a>
+        </div>
+        <div class="col-6 text-right">
+            <div sec:authorize="isAuthenticated()">Logged in user: <b><span sec:authentication="name"></span></b>
+                <form method="POST" th:action="@{/logout}">
+                    <input type="submit" value="Logout"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
