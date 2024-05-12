@@ -63,7 +63,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         if (activeProfile.equals("dev")) {
             createUserIfNotFound(userUsername, userFullname, userPassword, "USER");
-            createUserIfNotFound("user2", "User Management", userPassword, "MANAGER");
+            createUserIfNotFound("manager", "Manager", userPassword, "MANAGER");
             createPrivilegeIfNotFound("MANAGER", "USER_MANAGEMENT");
         }
 
