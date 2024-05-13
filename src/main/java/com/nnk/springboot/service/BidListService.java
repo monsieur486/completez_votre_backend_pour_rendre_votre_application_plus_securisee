@@ -37,4 +37,8 @@ public class BidListService {
     public void deleteBidList(Integer id) {
         bidListRepository.deleteById(id);
     }
+
+    public List<BidList> findAll() {
+        return bidListRepository.findAll();
+    }
 }

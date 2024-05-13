@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.service.BidListService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BidListController {
-    // TODO: Inject Bid service
+    private final BidListService bidListService;
+
+    public BidListController(BidListService bidListService) {
+        this.bidListService = bidListService;
+    }
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
-        // TODO: call service find all bids to show to the view
+        model.addAttribute("bidList", bidListService.findAll());
         return "bidList/list";
     }
 
@@ -34,7 +39,7 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
+        model.addAttribute("bidList", bidListService.findBidListById(id));
         return "bidList/update";
     }
 
@@ -47,7 +52,7 @@ public class BidListController {
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
+        bidListService.deleteBidList(id);
         return "redirect:/bidList/list";
     }
 }
