@@ -35,7 +35,7 @@ public class TradeTests {
 
         // Find
         List<Trade> listResult = tradeRepository.findAll();
-        Assert.assertTrue(listResult.size() > 0);
+        Assert.assertFalse(listResult.isEmpty());
 
         // Delete
         Integer id = trade.getTradeId();

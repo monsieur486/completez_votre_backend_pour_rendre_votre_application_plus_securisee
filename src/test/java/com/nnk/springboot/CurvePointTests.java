@@ -35,7 +35,7 @@ public class CurvePointTests {
 
         // Find
         List<CurvePoint> listResult = curvePointRepository.findAll();
-        Assert.assertTrue(listResult.size() > 0);
+        Assert.assertFalse(listResult.isEmpty());
 
         // Delete
         Integer id = curvePoint.getId();

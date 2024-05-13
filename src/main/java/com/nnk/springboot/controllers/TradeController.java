@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.service.TradeService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TradeController {
-    // TODO: Inject Trade service
+    private final TradeService tradeService;
+
+    public TradeController(TradeService tradeService) {
+        this.tradeService = tradeService;
+    }
 
     @RequestMapping("/trade/list")
     public String home(Model model) {
-        // TODO: find all Trade, add to model
+        model.addAttribute("trades", tradeService.findAllTrades());
         return "trade/list";
     }
 
@@ -46,7 +51,7 @@ public class TradeController {
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
+        tradeService.deleteTradeById(id);
         return "redirect:/trade/list";
     }
 }

@@ -15,23 +15,13 @@ public class BidListService {
         this.bidListRepository = bidListRepository;
     }
 
-
-    public List<BidList> findBidListByAccount(String account) {
-        return bidListRepository.findBidListByAccount(account);
-    }
-
     public BidList findBidListById(Integer id) {
         return bidListRepository.findById(id).orElse(null);
     }
 
-    public BidList addBidList(BidList bidList, String username) {
-        bidList.setCreationName(username);
-        return bidListRepository.save(bidList);
-    }
-
-    public BidList updateBidList(BidList bidList, String username) {
-        bidList.setRevisionName(username);
-        return bidListRepository.save(bidList);
+    public void updateBidList(BidList bidList, String revisionName) {
+        bidList.setRevisionName(revisionName);
+        bidListRepository.save(bidList);
     }
 
     public void deleteBidList(Integer id) {
@@ -40,5 +30,10 @@ public class BidListService {
 
     public List<BidList> findAll() {
         return bidListRepository.findAll();
+    }
+
+    public void saveBidList(BidList bidList, String creationName) {
+        bidList.setCreationName(creationName);
+        bidListRepository.save(bidList);
     }
 }

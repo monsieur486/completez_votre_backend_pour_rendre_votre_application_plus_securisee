@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.service.CurvePointService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CurveController {
-    // TODO: Inject Curve Point service
+    private final CurvePointService curvePointService;
+
+    public CurveController(CurvePointService curvePointService) {
+        this.curvePointService = curvePointService;
+    }
+
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
-        // TODO: find all Curve Point, add to model
+        model.addAttribute("curvePoints", curvePointService.findAllCurvePoints());
         return "curvePoint/list";
     }
 
@@ -46,7 +52,7 @@ public class CurveController {
 
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Curve by Id and delete the Curve, return to Curve list
+        curvePointService.deleteCurvePointById(id);
         return "redirect:/curvePoint/list";
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 
 @Controller
 public class BidListController {
@@ -22,7 +24,7 @@ public class BidListController {
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
-        model.addAttribute("bidList", bidListService.findAll());
+        model.addAttribute("bidLists", bidListService.findAll());
         return "bidList/list";
     }
 
@@ -32,9 +34,23 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
-        return "bidList/add";
+    public String validate(@Valid BidList bidlist,
+                           BindingResult result,
+                           Model model,
+                           Principal principal) {
+
+        if (bidlist.getBidQuantity() == null || bidlist.getBidQuantity() <= 1) {
+            result.rejectValue("bidQuantity", "", "Bid Quantity must be greater than 1");
+        }
+
+        if (result.hasErrors()) {
+            return "bidList/add";
+        }
+
+        bidListService.saveBidList(bidlist, principal.getName());
+
+        model.addAttribute("bidLists", bidListService.findAll());
+        return "bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
@@ -44,15 +60,31 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                            BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
-        return "redirect:/bidList/list";
+    public String updateBid(@PathVariable("id") Integer id,
+                            @Valid BidList bidList,
+                            BindingResult result,
+                            Model model,
+                            Principal principal) {
+
+        if (bidList.getBidQuantity() == null || bidList.getBidQuantity() <= 1) {
+            result.rejectValue("bidQuantity", "", "Bid Quantity must be greater than 1");
+        }
+
+
+        if (result.hasErrors()) {
+            model.addAttribute("bidList", bidListService.findBidListById(id));
+            return "bidList/update";
+        }
+
+        bidListService.updateBidList(bidList, principal.getName());
+        model.addAttribute("bidLists", bidListService.findAll());
+        return "bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         bidListService.deleteBidList(id);
-        return "redirect:/bidList/list";
+        model.addAttribute("bidLists", bidListService.findAll());
+        return "bidList/list";
     }
 }

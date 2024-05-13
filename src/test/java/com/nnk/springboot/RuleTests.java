@@ -35,7 +35,7 @@ public class RuleTests {
 
         // Find
         List<RuleName> listResult = ruleNameRepository.findAll();
-        Assert.assertTrue(listResult.size() > 0);
+        Assert.assertFalse(listResult.isEmpty());
 
         // Delete
         Integer id = rule.getId();

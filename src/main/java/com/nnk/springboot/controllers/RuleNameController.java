@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.service.RuleNameService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RuleNameController {
-    // TODO: Inject RuleName service
+    private final RuleNameService ruleNameService;
+
+    public RuleNameController(RuleNameService ruleNameService) {
+        this.ruleNameService = ruleNameService;
+    }
 
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
-        // TODO: find all RuleName, add to model
+        model.addAttribute("ruleNames", ruleNameService.findAllRuleNames());
         return "ruleName/list";
     }
 
@@ -46,7 +51,7 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
+        ruleNameService.deleteRuleNameById(id);
         return "redirect:/ruleName/list";
     }
 }
