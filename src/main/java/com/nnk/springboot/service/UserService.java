@@ -1,17 +1,10 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.domain.Privilege;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDto;
-import com.nnk.springboot.repositories.PrivilegeRepository;
 import com.nnk.springboot.repositories.UserRepository;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Service
 public class UserService {

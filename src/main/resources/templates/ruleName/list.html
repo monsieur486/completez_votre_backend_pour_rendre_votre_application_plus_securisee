@@ -13,7 +13,7 @@
     <div th:replace="~{fragments/menu :: menu}"></div>
     <div class="row"><h2>Rule List</h2></div>
     <div class="row">
-        <a sec:authorize="hasAuthority('ADD_PRIVILEGE')" class="btn btn-primary btn-sm" href="/ruleName/add">Add New</a>
+        <a class="btn btn-primary btn-sm" href="/ruleName/add" sec:authorize="hasAuthority('ADD_PRIVILEGE')">Add New</a>
         <table class="table table-bordered">
             <thead>
             <tr>

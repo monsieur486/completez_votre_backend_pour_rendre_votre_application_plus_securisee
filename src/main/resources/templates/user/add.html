@@ -42,7 +42,8 @@
                 <div class="col-sm-10">
                     <label class="checkbox-inline"><input th:field="*{role}" th:value="ADMIN" type="radio">Admin</label>
                     <label class="checkbox-inline"><input th:field="*{role}" th:value="USER" type="radio">User</label>
-                    <label class="checkbox-inline"><input th:field="*{role}" th:value="MANAGER" type="radio">MAnager</label>
+                    <label class="checkbox-inline"><input th:field="*{role}" th:value="MANAGER"
+                                                          type="radio">MAnager</label>
                     <p class="text-danger" th:errors="*{role}" th:if="${#fields.hasErrors('role')}"></p>
                 </div>
             </div>

@@ -1,9 +1,5 @@
 package com.nnk.springboot.configuration;
 
-import com.nnk.springboot.controllers.BidListController;
-import com.nnk.springboot.controllers.CurveController;
-import com.nnk.springboot.controllers.RatingController;
-import com.nnk.springboot.controllers.RuleNameController;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDto;
@@ -26,7 +22,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private final RuleNameService ruleNameService;
     private final TradeService tradeService;
     private final CurvePointService curvePointService;
-
 
 
     @Value("${ADMIN_USERNAME}")
@@ -111,9 +106,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         log.warn("Creating fixtures for BidList");
         BidList bidList = new BidList("Account Test", "Type Test", 10);
-        bidListService.saveBidList(bidList,"ADMIN");
+        bidListService.saveBidList(bidList, "ADMIN");
         BidList bidList2 = new BidList("Account Test 2", "Type Test 2", 20);
-        bidListService.saveBidList(bidList2,"ADMIN");
+        bidListService.saveBidList(bidList2, "ADMIN");
 
 
     }
