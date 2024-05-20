@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.service.BidListService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,11 +30,13 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/add")
+    @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String addBidForm(BidList bid) {
         return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
+    @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String validate(@Valid BidList bidlist,
                            BindingResult result,
                            Model model,
@@ -54,12 +57,14 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/update/{id}")
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("bidList", bidListService.findBidListById(id));
         return "bidList/update";
     }
 
     @PostMapping("/bidList/update/{id}")
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String updateBid(@PathVariable("id") Integer id,
                             @Valid BidList bidList,
                             BindingResult result,
@@ -81,6 +86,7 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/delete/{id}")
+    @PreAuthorize("hasAuthority('DELETE_PRIVILEGE')")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         bidListService.deleteBidList(id);
         model.addAttribute("bidLists", bidListService.findAll());
