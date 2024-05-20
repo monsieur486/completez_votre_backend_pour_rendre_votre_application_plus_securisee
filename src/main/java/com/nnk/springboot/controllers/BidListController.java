@@ -72,7 +72,6 @@ public class BidListController {
 
 
         if (result.hasErrors()) {
-            model.addAttribute("bidList", bidListService.findBidListById(id));
             return "bidList/update";
         }
 
