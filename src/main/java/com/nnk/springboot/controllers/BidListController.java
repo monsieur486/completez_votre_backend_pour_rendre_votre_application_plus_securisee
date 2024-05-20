@@ -39,7 +39,7 @@ public class BidListController {
                            Model model,
                            Principal principal) {
 
-        if (bidlist.getBidQuantity() == null || bidlist.getBidQuantity() <= 1) {
+        if (bidlist.getBidQuantity() == null || bidlist.getBidQuantity() < 1) {
             result.rejectValue("bidQuantity", "", "Bid Quantity must be greater than 1");
         }
 
@@ -66,7 +66,7 @@ public class BidListController {
                             Model model,
                             Principal principal) {
 
-        if (bidList.getBidQuantity() == null || bidList.getBidQuantity() <= 1) {
+        if (bidList.getBidQuantity() == null || bidList.getBidQuantity() < 1) {
             result.rejectValue("bidQuantity", "", "Bid Quantity must be greater than 1");
         }
 
