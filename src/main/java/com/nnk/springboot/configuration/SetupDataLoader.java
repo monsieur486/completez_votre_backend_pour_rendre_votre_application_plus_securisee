@@ -65,6 +65,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             createUserIfNotFound(userUsername, userFullname, userPassword, "USER");
             createUserIfNotFound("manager", "Manager", userPassword, "MANAGER");
             createPrivilegeIfNotFound("MANAGER", "USER_MANAGEMENT");
+
+            installFixtiures();
         }
 
         alreadySetup = true;
@@ -86,6 +88,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     private void createPrivilegeIfNotFound(String role, String name) {
         privilegeService.createIfNotFound(role, name);
+    }
+
+    private void installFixtiures() {
     }
 
 }

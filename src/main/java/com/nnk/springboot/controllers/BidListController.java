@@ -77,13 +77,13 @@ public class BidListController {
 
         bidListService.updateBidList(bidList, principal.getName());
         model.addAttribute("bidLists", bidListService.findAll());
-        return "bidList/list";
+        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         bidListService.deleteBidList(id);
         model.addAttribute("bidLists", bidListService.findAll());
-        return "bidList/list";
+        return "redirect:/bidList/list";
     }
 }

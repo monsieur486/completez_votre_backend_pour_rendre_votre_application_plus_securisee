@@ -31,8 +31,8 @@
                 <td th:text="${bidList.type}"></td>
                 <td th:text="${bidList.bidQuantity}"></td>
                 <td class="text-center" style="width: 15%">
-                    <a th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/bidList/delete/{id}(id=${bidList.bidListId})}">Delete</a>
+                    <a sec:authorize="hasAuthority('UPDATE_PRIVILEGE')" th:href="@{/bidList/update/{id}(id=${bidList.bidListId})}">Edit</a>&nbsp;|&nbsp;
+                    <a sec:authorize="hasAuthority('DELETE_PRIVILEGE')" th:href="@{/bidList/delete/{id}(id=${bidList.bidListId})}">Delete</a>
                 </td>
             </tr>
             </tbody>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CurveController {
+
     private final CurvePointService curvePointService;
 
     public CurveController(CurvePointService curvePointService) {
