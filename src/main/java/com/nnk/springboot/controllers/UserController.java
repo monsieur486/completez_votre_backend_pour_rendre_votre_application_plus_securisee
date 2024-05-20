@@ -3,7 +3,6 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,11 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 
 @Controller
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @RequestMapping("/user/list")
     public String home(Model model) {
@@ -52,10 +57,20 @@ public class UserController {
     }
 
     @PostMapping("/user/update/{id}")
-    public String updateUser(@PathVariable("id") Integer id, @Valid User user,
-                             BindingResult result, Model model) {
+    public String updateUser(@PathVariable("id") Integer id,
+                             @Valid User user,
+                             BindingResult result,
+                             Principal principal,
+                             Model model) {
         if (result.hasErrors()) {
             return "user/update";
+        }
+
+        if (principal.getName().equals(user.getUsername())) {
+            model.addAttribute("errorMessage",
+                    "You can't change your own role.");
+            model.addAttribute("users", userRepository.findAll());
+            return "user/list";
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -68,8 +83,18 @@ public class UserController {
 
     @GetMapping("/user/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+    public String deleteUser(@PathVariable("id") Integer id,
+                             Model model,
+                             Principal principal) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+
+        if (principal.getName().equals(user.getUsername())) {
+            model.addAttribute("errorMessage",
+                    "You can't delete your own account.");
+            model.addAttribute("users", userRepository.findAll());
+            return "user/list";
+        }
+
         userRepository.delete(user);
         model.addAttribute("users", userRepository.findAll());
         return "redirect:/user/list";
