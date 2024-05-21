@@ -35,14 +35,22 @@ public class TradeController {
     @PostMapping("/trade/validate")
     @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
-        return "trade/add";
+
+        if (result.hasErrors()) {
+            return "trade/add";
+        }
+
+        tradeService.saveTrade(trade);
+        model.addAttribute("trades", tradeService.findAllTrades());
+
+        return "trade/list";
     }
 
     @GetMapping("/trade/update/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
+        Trade trade = tradeService.findTradeById(id);
+        model.addAttribute("trade", trade);
         return "trade/update";
     }
 
@@ -50,7 +58,15 @@ public class TradeController {
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                               BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+
+        if (result.hasErrors()) {
+            return "trade/update";
+        }
+
+        trade.setTradeId(id);
+        tradeService.saveTrade(trade);
+        model.addAttribute("trades", tradeService.findAllTrades());
+
         return "redirect:/trade/list";
     }
 

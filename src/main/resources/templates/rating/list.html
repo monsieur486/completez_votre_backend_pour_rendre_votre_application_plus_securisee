@@ -33,8 +33,10 @@
                 <td th:text="${rating.fitchRating}"></td>
                 <td th:text="${rating.orderNumber}"></td>
                 <td class="text-center" style="width: 15%">
-                    <a th:href="@{/rating/update/{id}(id=${rating.id})}">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/rating/delete/{id}(id=${rating.id})}">Delete</a>
+                    <a sec:authorize="hasAuthority('UPDATE_PRIVILEGE')"
+                       th:href="@{/rating/update/{id}(id=${rating.id})}">Edit</a>&nbsp;|&nbsp;
+                    <a sec:authorize="hasAuthority('DELETE_PRIVILEGE')"
+                       th:href="@{/rating/delete/{id}(id=${rating.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>
