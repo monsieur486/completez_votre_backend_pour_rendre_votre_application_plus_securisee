@@ -6,6 +6,8 @@ import com.nnk.springboot.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -34,4 +36,15 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
 }
