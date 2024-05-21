@@ -32,4 +32,8 @@ public class CurvePointService {
     public boolean existsById(Integer id) {
         return curvePointRepository.existsById(id);
     }
+
+    public void updateCurvePoint(CurvePoint curvePoint) {
+        curvePointRepository.save(curvePoint);
+    }
 }

@@ -28,12 +28,14 @@
             <tbody>
             <tr th:each="curvePoint : ${curvePoints}">
                 <td style="width: 10%" th:text="${curvePoint.id}"></td>
-                <td th:text="${curvePoint.id}"></td>
+                <td th:text="${curvePoint.curveId}"></td>
                 <td th:text="${curvePoint.term}"></td>
-                <td th:text="${curvePoint.value}"></td>
+                <td th:text="${curvePoint.pointValue}"></td>
                 <td class="text-center" style="width: 15%">
-                    <a th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/curvePoint/delete/{id}(id=${curvePoint.id})}">Delete</a>
+                    <a sec:authorize="hasAuthority('UPDATE_PRIVILEGE')"
+                       th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Edit</a>&nbsp;|&nbsp;
+                    <a sec:authorize="hasAuthority('DELETE_PRIVILEGE')"
+                       th:href="@{/curvePoint/delete/{id}(id=${curvePoint.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>

@@ -1,6 +1,7 @@
 package com.nnk.springboot.configuration;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDto;
 import com.nnk.springboot.service.*;
@@ -109,6 +110,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         bidListService.saveBidList(bidList, "ADMIN");
         BidList bidList2 = new BidList("Account Test 2", "Type Test 2", 20);
         bidListService.saveBidList(bidList2, "ADMIN");
+
+        log.warn("Creating fixtures for CurevePoint");
+        curvePointService.saveCurvePoint(new CurvePoint(10, 10d, 30d));
+        curvePointService.saveCurvePoint(new CurvePoint(20, 20d, 40d));
+
 
 
     }
