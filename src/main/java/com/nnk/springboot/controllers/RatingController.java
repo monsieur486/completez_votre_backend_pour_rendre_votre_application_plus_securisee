@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.service.RatingService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,11 +29,13 @@ public class RatingController {
     }
 
     @GetMapping("/rating/add")
+    @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String addRatingForm(Rating rating) {
         return "rating/add";
     }
 
     @PostMapping("/rating/validate")
+    @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
 
         if (!result.hasErrors()) {
@@ -45,6 +48,7 @@ public class RatingController {
     }
 
     @GetMapping("/rating/update/{id}")
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 
         Rating rating = ratingService.findRatingById(id);
@@ -54,6 +58,7 @@ public class RatingController {
     }
 
     @PostMapping("/rating/update/{id}")
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                                BindingResult result, Model model) {
 
@@ -70,6 +75,7 @@ public class RatingController {
     }
 
     @GetMapping("/rating/delete/{id}")
+    @PreAuthorize("hasAuthority('DELETE_PRIVILEGE')")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
 
         ratingService.deleteRatingById(id);
