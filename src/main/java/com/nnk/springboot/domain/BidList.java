@@ -3,12 +3,15 @@ package com.nnk.springboot.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Range;
 
 import java.sql.Timestamp;
 
@@ -32,7 +35,8 @@ public class BidList {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    @Min(value = 1, message = "Bid Quantity must be greater than 1")
+    @Range(min = 1, message = "Bid Quantity must be greater than 1")
+    @NotNull(message = "Bid Quantity must be greater than 1")
     private Double bidQuantity;
 
     private Double askQuantity;
