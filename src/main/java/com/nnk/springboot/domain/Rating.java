@@ -2,10 +2,12 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Getter
@@ -31,6 +33,8 @@ public class Rating {
     @NotBlank(message = "Fitch rating is mandatory")
     private String fitchRating;
 
+    @Range(min = 1, message = "must not be null")
+    @NotNull(message = "must not be null")
     private Integer orderNumber;
 
     public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
