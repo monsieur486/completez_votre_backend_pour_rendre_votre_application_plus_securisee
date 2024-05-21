@@ -16,8 +16,8 @@ public class InstallTradeFixture {
 
     public void execute() {
         log.warn("Creating fixtures for Trade");
-        tradeService.saveTrade(new Trade("Trade Account Test", "Type Test"));
-        tradeService.saveTrade(new Trade("Trade Account Test 2", "Type Test 2"));
+        tradeService.saveTrade(new Trade("Trade Account Test", "Type Test", 10.0));
+        tradeService.saveTrade(new Trade("Trade Account Test 2", "Type Test 2", 20.0));
     }
 
 }

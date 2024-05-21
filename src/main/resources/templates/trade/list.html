@@ -26,13 +26,15 @@
             </thead>
             <tbody>
             <tr th:each="trade : ${trades}">
-                <td style="width: 10%" th:text="${trade.id}"></td>
+                <td style="width: 10%" th:text="${trade.tradeId}"></td>
                 <td th:text="${trade.account}"></td>
                 <td th:text="${trade.type}"></td>
                 <td th:text="${trade.buyQuantity}"></td>
                 <td class="text-center" style="width: 15%">
-                    <a th:href="@{/trade/update/{id}(id=${trade.id})}">Edit</a>&nbsp;|&nbsp;
-                    <a th:href="@{/trade/delete/{id}(id=${trade.id})}">Delete</a>
+                    <a sec:authorize="hasAuthority('UPDATE_PRIVILEGE')"
+                       th:href="@{/trade/update/{id}(id=${trade.tradeId})}">Edit</a>&nbsp;|&nbsp;
+                    <a sec:authorize="hasAuthority('DELETE_PRIVILEGE')"
+                       th:href="@{/trade/delete/{id}(id=${trade.tradeId})}">Delete</a>
                 </td>
             </tr>
             </tbody>
