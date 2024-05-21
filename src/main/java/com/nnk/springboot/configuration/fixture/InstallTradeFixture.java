@@ -1,7 +1,7 @@
 package com.nnk.springboot.configuration.fixture;
 
 import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.service.*;
+import com.nnk.springboot.service.TradeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

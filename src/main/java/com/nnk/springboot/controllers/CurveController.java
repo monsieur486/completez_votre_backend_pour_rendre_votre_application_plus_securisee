@@ -37,7 +37,7 @@ public class CurveController {
     @PostMapping("/curvePoint/validate")
     @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        if(curvePoint.getCurveId() == null || curvePoint.getCurveId() == 0) {
+        if (curvePoint.getCurveId() == null || curvePoint.getCurveId() == 0) {
             result.rejectValue("curveId", "", "must not be null");
         }
 
@@ -63,7 +63,7 @@ public class CurveController {
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                             BindingResult result, Model model) {
-        if(curvePoint.getCurveId() == null || curvePoint.getCurveId() <= 0) {
+        if (curvePoint.getCurveId() == null || curvePoint.getCurveId() <= 0) {
             result.rejectValue("curveId", "", "must not be null");
         }
 
