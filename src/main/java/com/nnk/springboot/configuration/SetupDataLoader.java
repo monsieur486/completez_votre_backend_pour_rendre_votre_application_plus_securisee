@@ -1,6 +1,6 @@
 package com.nnk.springboot.configuration;
 
-import com.nnk.springboot.configuration.fixture.InstallFixture;
+import com.nnk.springboot.configuration.fixture.*;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDto;
 import com.nnk.springboot.service.*;
@@ -17,7 +17,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     private final UserService userService;
     private final PrivilegeService privilegeService;
-    private final InstallFixture installFixture;
+    private final InstallBidListFixture installBidListFixture;
+    private final InstallCurvePointFixture installCurvePointFixture;
+    private final InstallRatingFixture installRatingFixture;
+    private final InstallRuleNameFixture installRuleNameFixture;
+    private final InstallTradeFixture installTradeFixture;
 
     @Value("${ADMIN_USERNAME}")
     public String adminUsername;
@@ -42,10 +46,14 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     private boolean alreadySetup = false;
 
-    public SetupDataLoader(UserService userService, PrivilegeService privilegeService, InstallFixture installFixture) {
+    public SetupDataLoader(UserService userService, PrivilegeService privilegeService, InstallBidListFixture installBidListFixture, InstallCurvePointFixture installCurvePointFixture, InstallRatingFixture installRatingFixture, InstallRuleNameFixture installRuleNameFixture, InstallTradeFixture installTradeFixture) {
         this.userService = userService;
         this.privilegeService = privilegeService;
-        this.installFixture = installFixture;
+        this.installBidListFixture = installBidListFixture;
+        this.installCurvePointFixture = installCurvePointFixture;
+        this.installRatingFixture = installRatingFixture;
+        this.installRuleNameFixture = installRuleNameFixture;
+        this.installTradeFixture = installTradeFixture;
     }
 
 
@@ -69,11 +77,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             createUserIfNotFound("manager", "Manager", userPassword, "MANAGER");
             createPrivilegeIfNotFound("MANAGER", "USER_MANAGEMENT");
 
-            installFixture.installBidListFixture();
-            installFixture.installCurvePointFixture();
-            installFixture.installRatingFixture();
-            installFixture.installRuleNameFixture();
-            installFixture.installTradeFixture();
+            installBidListFixture.execute();
+            installCurvePointFixture.execute();
+            installRatingFixture.execute();
+            installRuleNameFixture.execute();
+            installTradeFixture.execute();
         }
 
         alreadySetup = true;
