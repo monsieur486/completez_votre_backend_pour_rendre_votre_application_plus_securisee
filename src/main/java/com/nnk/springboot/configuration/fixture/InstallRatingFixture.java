@@ -1,7 +1,7 @@
 package com.nnk.springboot.configuration.fixture;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.services.RatingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package com.nnk.springboot.configuration.fixture;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.service.CurvePointService;
+import com.nnk.springboot.services.CurvePointService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.nnk.springboot.service;
+package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Privilege;
 import com.nnk.springboot.repositories.PrivilegeRepository;

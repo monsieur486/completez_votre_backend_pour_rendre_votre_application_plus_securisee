@@ -1,7 +1,7 @@
 package com.nnk.springboot.configuration.fixture;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.service.BidListService;
+import com.nnk.springboot.services.BidListService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

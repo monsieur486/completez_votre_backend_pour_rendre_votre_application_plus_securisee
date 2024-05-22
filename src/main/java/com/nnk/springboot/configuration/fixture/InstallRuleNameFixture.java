@@ -1,7 +1,7 @@
 package com.nnk.springboot.configuration.fixture;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.service.RuleNameService;
+import com.nnk.springboot.services.RuleNameService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

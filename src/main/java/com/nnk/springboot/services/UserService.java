@@ -1,7 +1,7 @@
-package com.nnk.springboot.service;
+package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.dto.UserDto;
+import com.nnk.springboot.domain.UserDto;
 import com.nnk.springboot.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

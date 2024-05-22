@@ -2,9 +2,9 @@ package com.nnk.springboot.configuration;
 
 import com.nnk.springboot.configuration.fixture.*;
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.dto.UserDto;
-import com.nnk.springboot.service.PrivilegeService;
-import com.nnk.springboot.service.UserService;
+import com.nnk.springboot.domain.UserDto;
+import com.nnk.springboot.services.PrivilegeService;
+import com.nnk.springboot.services.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
