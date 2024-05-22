@@ -13,7 +13,13 @@ public class TradeService {
         this.tradeRepository = tradeRepository;
     }
 
-    public void saveTrade(Trade trade) {
+    public void saveTrade(Trade trade, String creationName) {
+        trade.setCreationName(creationName);
+        tradeRepository.save(trade);
+    }
+
+    public void updateTrade(Trade trade, String revisionName) {
+        trade.setRevisionName(revisionName);
         tradeRepository.save(trade);
     }
 
@@ -29,7 +35,4 @@ public class TradeService {
         tradeRepository.deleteById(id);
     }
 
-    public boolean existsById(Integer id) {
-        return tradeRepository.existsById(id);
-    }
 }

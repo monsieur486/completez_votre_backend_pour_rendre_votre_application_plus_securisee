@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 @Controller
 public class TradeController {
     private final TradeService tradeService;
@@ -34,13 +36,13 @@ public class TradeController {
 
     @PostMapping("/trade/validate")
     @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
+    public String validate(@Valid Trade trade, BindingResult result, Model model, Principal principal) {
 
         if (result.hasErrors()) {
             return "trade/add";
         }
 
-        tradeService.saveTrade(trade);
+        tradeService.saveTrade(trade, principal.getName());
         model.addAttribute("trades", tradeService.findAllTrades());
 
         return "trade/list";
@@ -57,14 +59,14 @@ public class TradeController {
     @PostMapping("/trade/update/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
-                              BindingResult result, Model model) {
+                              BindingResult result, Model model, Principal principal) {
 
         if (result.hasErrors()) {
             return "trade/update";
         }
 
         trade.setTradeId(id);
-        tradeService.saveTrade(trade);
+        tradeService.updateTrade(trade, principal.getName());
         model.addAttribute("trades", tradeService.findAllTrades());
 
         return "redirect:/trade/list";
