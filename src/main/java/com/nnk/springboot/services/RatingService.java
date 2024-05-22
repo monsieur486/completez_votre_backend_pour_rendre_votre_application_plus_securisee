@@ -4,6 +4,8 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RatingService {
 
@@ -21,7 +23,7 @@ public class RatingService {
         return ratingRepository.findById(id).orElse(null);
     }
 
-    public Iterable<Rating> findAllRatings() {
+    public List<Rating> findAllRatings() {
         return ratingRepository.findAll();
     }
 
@@ -31,5 +33,9 @@ public class RatingService {
 
     public boolean existsById(Integer id) {
         return ratingRepository.existsById(id);
+    }
+
+    public void updateRating(Rating rating) {
+        ratingRepository.save(rating);
     }
 }

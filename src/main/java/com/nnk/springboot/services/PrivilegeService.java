@@ -33,4 +33,24 @@ public class PrivilegeService {
             privilegeRepository.save(new Privilege(role, name));
         }
     }
+
+    public Privilege findPrivilegeById(int i) {
+        return privilegeRepository.findById(i).orElse(null);
+    }
+
+    public void savePrivilege(Privilege privilege) {
+        privilegeRepository.save(privilege);
+    }
+
+    public void deletePrivilegeById(int i) {
+        privilegeRepository.deleteById(i);
+    }
+
+    public List<Privilege> findAllPrivileges() {
+        return privilegeRepository.findAll();
+    }
+
+    public void updatePrivilege(Privilege privilege) {
+        privilegeRepository.save(privilege);
+    }
 }
