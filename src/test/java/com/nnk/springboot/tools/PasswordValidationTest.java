@@ -1,6 +1,5 @@
-package com.nnk.springboot.configuration.tools;
+package com.nnk.springboot.tools;
 
-import com.nnk.springboot.tools.PasswordValidation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,5 +28,17 @@ class PasswordValidationTest {
     void containsSpecialCharacter() {
         assertTrue(PasswordValidation.containsSpecialCharacter("pasSword!"));
         assertFalse(PasswordValidation.containsSpecialCharacter("pasSword"));
+    }
+
+    @Test
+    void hasMinimumLength() {
+        assertTrue(PasswordValidation.hasMinimumLength("pasSword1!"));
+        assertFalse(PasswordValidation.hasMinimumLength("pasS1!"));
+    }
+
+    @Test
+    void hasMaximumLength() {
+        assertTrue(PasswordValidation.hasMaximumLength("pasSword1!"));
+        assertFalse(PasswordValidation.hasMaximumLength("123456789012345678901234567890123456789012345678901"));
     }
 }
