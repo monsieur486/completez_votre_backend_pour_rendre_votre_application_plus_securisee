@@ -1,25 +1,26 @@
 package com.nnk.springboot.fixture;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.services.BidListService;
+import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.services.TradeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class InstallBidListFixtureTest {
+class InstallTradeFixtureTest {
 
     @Mock
-    BidListService bidListService;
+    TradeService tradeService;
 
     @InjectMocks
-    InstallBidListFixture installBidListFixture;
+    InstallTradeFixture installTradeFixture;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +29,7 @@ class InstallBidListFixtureTest {
 
     @Test
     void execute() {
-        installBidListFixture.execute();
-        verify(bidListService, times(2)).saveBidList(any(BidList.class), eq("admin"));
+        installTradeFixture.execute();
+        verify(tradeService, times(2)).saveTrade(any(Trade.class), eq("admin"));
     }
 }

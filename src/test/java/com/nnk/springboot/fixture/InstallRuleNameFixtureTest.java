@@ -1,25 +1,25 @@
 package com.nnk.springboot.fixture;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.services.BidListService;
+import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.services.RuleNameService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-class InstallBidListFixtureTest {
+class InstallRuleNameFixtureTest {
 
     @Mock
-    BidListService bidListService;
+    RuleNameService ruleNameService;
 
     @InjectMocks
-    InstallBidListFixture installBidListFixture;
+    InstallRuleNameFixture installRuleNameFixture;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +28,7 @@ class InstallBidListFixtureTest {
 
     @Test
     void execute() {
-        installBidListFixture.execute();
-        verify(bidListService, times(2)).saveBidList(any(BidList.class), eq("admin"));
+        installRuleNameFixture.execute();
+        verify(ruleNameService, times(2)).saveRuleName(any(RuleName.class));
     }
 }

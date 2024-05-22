@@ -108,27 +108,27 @@ public class UserController {
     }
 
     private void validatePassword(@Valid User user, BindingResult result) {
-        if(!PasswordValidation.hasMinimumLength(user.getPassword())) {
+        if (!PasswordValidation.hasMinimumLength(user.getPassword())) {
             result.rejectValue("password", "password", "Password must be at least " + ApplicationConfiguration.MINIMUM_PASSWORD_LENGTH + " characters.");
         }
 
-        if(!PasswordValidation.hasMaximumLength(user.getPassword())) {
+        if (!PasswordValidation.hasMaximumLength(user.getPassword())) {
             result.rejectValue("password", "password", "Password must be less than " + ApplicationConfiguration.MAXIMUM_PASSWORD_LENGTH + " characters.");
         }
 
-        if(!PasswordValidation.containsCapitalLetter(user.getPassword())) {
+        if (!PasswordValidation.containsCapitalLetter(user.getPassword())) {
             result.rejectValue("password", "password", "Password must contain at least one capital letter.");
         }
 
-        if(!PasswordValidation.containsLowercaseLetter(user.getPassword())) {
+        if (!PasswordValidation.containsLowercaseLetter(user.getPassword())) {
             result.rejectValue("password", "password", "Password must contain at least one lowercase letter.");
         }
 
-        if(!PasswordValidation.containsDigit(user.getPassword())) {
+        if (!PasswordValidation.containsDigit(user.getPassword())) {
             result.rejectValue("password", "password", "Password must contain at least one digit.");
         }
 
-        if(!PasswordValidation.containsSpecialCharacter(user.getPassword())) {
+        if (!PasswordValidation.containsSpecialCharacter(user.getPassword())) {
             result.rejectValue("password", "password", "Password must contain at least one special character.");
         }
     }
