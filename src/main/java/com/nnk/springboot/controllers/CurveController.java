@@ -24,7 +24,7 @@ public class CurveController {
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
-        model.addAttribute("curvePoints", curvePointService.findAllCurvePoints());
+        model.addAttribute("curvePoints", curvePointService.findAll());
         return "curvePoint/list";
     }
 
@@ -44,7 +44,7 @@ public class CurveController {
 
         curvePointService.saveCurvePoint(curvePoint);
 
-        model.addAttribute("curvePoints", curvePointService.findAllCurvePoints());
+        model.addAttribute("curvePoints", curvePointService.findAll());
         return "curvePoint/list";
     }
 
@@ -74,7 +74,7 @@ public class CurveController {
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         curvePointService.deleteCurvePointById(id);
-        model.addAttribute("curvePoints", curvePointService.findAllCurvePoints());
+        model.addAttribute("curvePoints", curvePointService.findAll());
         return "redirect:/curvePoint/list";
     }
 }

@@ -14,7 +14,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 class CurvePointServiceTest {
     @Mock
@@ -58,10 +57,10 @@ class CurvePointServiceTest {
     }
 
     @Test
-    void findAllCurvePoints() {
+    void findAll() {
         when(curvePointRepository.findAll()).thenReturn(Collections.emptyList());
 
-        Iterable<CurvePoint> result = curvePointService.findAllCurvePoints();
+        Iterable<CurvePoint> result = curvePointService.findAll();
 
         assertEquals(0, ((List<CurvePoint>) result).size());
         verify(curvePointRepository, times(1)).findAll();

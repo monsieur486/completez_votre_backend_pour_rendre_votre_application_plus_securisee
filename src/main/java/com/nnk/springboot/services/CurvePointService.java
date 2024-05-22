@@ -4,6 +4,8 @@ import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CurvePointService {
 
@@ -21,7 +23,7 @@ public class CurvePointService {
         return curvePointRepository.findById(id).orElse(null);
     }
 
-    public Iterable<CurvePoint> findAllCurvePoints() {
+    public List<CurvePoint> findAll() {
         return curvePointRepository.findAll();
     }
 
