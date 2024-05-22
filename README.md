@@ -6,22 +6,29 @@
 3. Thymeleaf
 4. Bootstrap v.4.3.1
 
+## Installation:
+Make a copy of the dist.env file, naming it .env, then provide the security information
 
-## Setup with Intellij IDE
-1. Create project from Initializr: File > New > project > Spring Initializr
-2. Add lib repository into pom.xml
-3. Add folders
-    - Source root: src/main/java
-    - View: src/main/resources
-    - Static: src/main/resource/static
-4. Create database with name "demo" as configuration in application.properties
-5. Run sql script to create table doc/data.sql
+By activating the development profile, the following fixtures are automatically loaded:
+### Users:
 
-## Implement a Feature
-1. Create mapping domain class and place in package com.nnk.springboot.domain
-2. Create repository class and place in package com.nnk.springboot.repositories
-3. Create controller class and place in package com.nnk.springboot.controllers
+#### Admin:
+- username: admin
+- password: Passw0rd!
 
-## Security
-1. Create user service to load user from  database and place in package com.nnk.springboot.services
-2. Add configuration class and place in package com.nnk.springboot.config
+#### User:
+- username: user
+- password: Passw0rd!
+
+#### Manager:
+- username: manager
+- password: Passw0rd!
+
+### Roles:
+
+- ADMIN : Full privileges, but cannot delete own account or change own role.
+- USER : Read-only, does not have access to user information.
+- MANAGER : Read-only, can create, update users (cannot delete) .
+
+
+
