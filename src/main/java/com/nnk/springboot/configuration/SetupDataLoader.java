@@ -33,15 +33,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Value("${ADMIN_PASSWORD}")
     public String adminPassword;
 
-    @Value("${USER_USERNAME}")
-    public String userUsername;
-
-    @Value("${USER_FULLNAME}")
-    public String userFullname;
-
-    @Value("${USER_PASSWORD}")
-    public String userPassword;
-
     @Value("${spring.profiles.active}")
     private String activeProfile;
 
@@ -65,24 +56,24 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             return;
         }
 
-        createUserIfNotFound(adminUsername, adminFullname, adminPassword, "ADMIN");
-
         createPrivilegeIfNotFound("ADMIN", "ADD_PRIVILEGE");
         createPrivilegeIfNotFound("ADMIN", "UPDATE_PRIVILEGE");
         createPrivilegeIfNotFound("ADMIN", "DELETE_PRIVILEGE");
         createPrivilegeIfNotFound("ADMIN", "USER_MANAGEMENT");
-
+        createPrivilegeIfNotFound("MANAGER", "USER_MANAGEMENT");
 
         if (activeProfile.equals("dev")) {
-            createUserIfNotFound(userUsername, userFullname, userPassword, "USER");
-            createUserIfNotFound("manager", "Manager", userPassword, "MANAGER");
-            createPrivilegeIfNotFound("MANAGER", "USER_MANAGEMENT");
+            createUserIfNotFound("admin", "Administrator", "Passw0rd*", "ADMIN");
+            createUserIfNotFound("user", "User", "Passw0rd*", "USER");
+            createUserIfNotFound("manager", "Manager", "Passw0rd*", "MANAGER");
 
             installBidListFixture.execute();
             installCurvePointFixture.execute();
             installRatingFixture.execute();
             installRuleNameFixture.execute();
             installTradeFixture.execute();
+        } else {
+            createUserIfNotFound(adminUsername, adminFullname, adminPassword, "ADMIN");
         }
 
         alreadySetup = true;
