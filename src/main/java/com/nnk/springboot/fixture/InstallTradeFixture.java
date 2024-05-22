@@ -1,4 +1,4 @@
-package com.nnk.springboot.configuration.fixture;
+package com.nnk.springboot.fixture;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.services.TradeService;

@@ -1,4 +1,4 @@
-package com.nnk.springboot.configuration.fixture;
+package com.nnk.springboot.fixture;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.services.CurvePointService;

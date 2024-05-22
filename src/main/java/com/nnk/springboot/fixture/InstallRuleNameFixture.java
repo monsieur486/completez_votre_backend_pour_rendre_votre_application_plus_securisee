@@ -1,4 +1,4 @@
-package com.nnk.springboot.configuration.fixture;
+package com.nnk.springboot.fixture;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.services.RuleNameService;

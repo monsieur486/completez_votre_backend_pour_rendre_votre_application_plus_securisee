@@ -1,7 +1,9 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.configuration.ApplicationConfiguration;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.UserService;
+import com.nnk.springboot.tools.PasswordValidation;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,6 +41,8 @@ public class UserController {
 
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
+        validatePassword(user, result);
+
         if (!result.hasErrors()) {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
@@ -63,6 +67,8 @@ public class UserController {
                              BindingResult result,
                              Principal principal,
                              Model model) {
+        validatePassword(user, result);
+
         if (result.hasErrors()) {
             return "user/update";
         }
@@ -99,5 +105,31 @@ public class UserController {
         userService.delete(user);
         model.addAttribute("users", userService.findAll());
         return "redirect:/user/list";
+    }
+
+    private void validatePassword(@Valid User user, BindingResult result) {
+        if(!PasswordValidation.hasMinimumLength(user.getPassword())) {
+            result.rejectValue("password", "password", "Password must be at least " + ApplicationConfiguration.MINIMUM_PASSWORD_LENGTH + " characters.");
+        }
+
+        if(!PasswordValidation.hasMaximumLength(user.getPassword())) {
+            result.rejectValue("password", "password", "Password must be less than " + ApplicationConfiguration.MAXIMUM_PASSWORD_LENGTH + " characters.");
+        }
+
+        if(!PasswordValidation.containsCapitalLetter(user.getPassword())) {
+            result.rejectValue("password", "password", "Password must contain at least one capital letter.");
+        }
+
+        if(!PasswordValidation.containsLowercaseLetter(user.getPassword())) {
+            result.rejectValue("password", "password", "Password must contain at least one lowercase letter.");
+        }
+
+        if(!PasswordValidation.containsDigit(user.getPassword())) {
+            result.rejectValue("password", "password", "Password must contain at least one digit.");
+        }
+
+        if(!PasswordValidation.containsSpecialCharacter(user.getPassword())) {
+            result.rejectValue("password", "password", "Password must contain at least one special character.");
+        }
     }
 }
