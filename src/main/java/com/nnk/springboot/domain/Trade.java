@@ -34,7 +34,6 @@ public class Trade {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    @Range(min = 1, message = "Buy Quantity must be greater than 1")
     @NotNull(message = "Buy Quantity must be greater than 1")
     private Double buyQuantity;
 
