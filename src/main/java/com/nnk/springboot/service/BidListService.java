@@ -21,6 +21,7 @@ public class BidListService {
 
     public void updateBidList(BidList bidList, String revisionName) {
         bidList.setRevisionName(revisionName);
+        bidList.setRevisionDate(new java.sql.Timestamp(System.currentTimeMillis()));
         bidListRepository.save(bidList);
     }
 
@@ -34,6 +35,7 @@ public class BidListService {
 
     public void saveBidList(BidList bidList, String creationName) {
         bidList.setCreationName(creationName);
+        bidList.setCreationDate(new java.sql.Timestamp(System.currentTimeMillis()));
         bidListRepository.save(bidList);
     }
 }

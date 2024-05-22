@@ -18,9 +18,9 @@ public class InstallBidListFixture {
     public void execute() {
         log.warn("Creating fixtures for BidList");
         BidList bidList = new BidList("Account Test", "Type Test", 10);
-        bidListService.saveBidList(bidList, "ADMIN");
+        bidListService.saveBidList(bidList, "admin");
         BidList bidList2 = new BidList("Account Test 2", "Type Test 2", 20);
-        bidListService.saveBidList(bidList2, "ADMIN");
+        bidListService.saveBidList(bidList2, "admin");
     }
 
 }

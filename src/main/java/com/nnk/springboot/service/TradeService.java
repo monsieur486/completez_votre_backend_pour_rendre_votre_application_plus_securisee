@@ -15,11 +15,13 @@ public class TradeService {
 
     public void saveTrade(Trade trade, String creationName) {
         trade.setCreationName(creationName);
+        trade.setCreationDate(new java.sql.Timestamp(System.currentTimeMillis()));
         tradeRepository.save(trade);
     }
 
     public void updateTrade(Trade trade, String revisionName) {
         trade.setRevisionName(revisionName);
+        trade.setRevisionDate(new java.sql.Timestamp(System.currentTimeMillis()));
         tradeRepository.save(trade);
     }
 
