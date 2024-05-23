@@ -26,12 +26,12 @@ public class PrivilegeTests {
         // Save
         privilege = privilegeRepository.save(privilege);
         assertNotNull(privilege.getId());
-        assertTrue(privilege.getRole().equals("Role"));
+        assertEquals("Role", privilege.getRole());
 
         // Update
         privilege.setRole("Role Update");
         privilege = privilegeRepository.save(privilege);
-        assertTrue(privilege.getRole().equals("Role Update"));
+        assertEquals("Role Update", privilege.getRole());
 
         // Find
         privilegeRepository.findAll();

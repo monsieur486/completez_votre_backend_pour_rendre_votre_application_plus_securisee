@@ -12,7 +12,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class CurveControllerTest {
