@@ -12,6 +12,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+/**
+ * SetupDataLoader is a component class that initializes the application with default data.
+ * It implements the ApplicationListener interface and listens for the ContextRefreshedEvent.
+ */
 @Component
 @Slf4j
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -49,6 +53,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
 
+    /**
+     * This method is triggered when the application context is refreshed.
+     * It checks if the setup is already done, if not, it creates default privileges and users.
+     *
+     * @param event the ContextRefreshedEvent
+     */
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -56,17 +66,20 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             return;
         }
 
+        // Privileges
         createPrivilegeIfNotFound("ADMIN", "ADD_PRIVILEGE");
         createPrivilegeIfNotFound("ADMIN", "UPDATE_PRIVILEGE");
         createPrivilegeIfNotFound("ADMIN", "DELETE_PRIVILEGE");
         createPrivilegeIfNotFound("ADMIN", "USER_MANAGEMENT");
         createPrivilegeIfNotFound("MANAGER", "USER_MANAGEMENT");
 
+        // Users
         if (activeProfile.equals("dev")) {
             createUserIfNotFound("admin", "Administrator", "Passw0rd*", "ADMIN");
             createUserIfNotFound("user", "User", "Passw0rd*", "USER");
             createUserIfNotFound("manager", "Manager", "Passw0rd*", "MANAGER");
 
+            // Fixtures
             installBidListFixture.execute();
             installCurvePointFixture.execute();
             installRatingFixture.execute();
@@ -79,6 +92,14 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         alreadySetup = true;
     }
 
+    /**
+     * This method creates a user if it does not exist.
+     *
+     * @param username the username of the user
+     * @param fullname the full name of the user
+     * @param password the password of the user
+     * @param role the role of the user
+     */
     private void createUserIfNotFound(String username, String fullname, String password, String role) {
         if (activeProfile.equals("dev")) {
             log.warn("Creating user username: {}", username);
@@ -93,6 +114,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         }
     }
 
+    /**
+     * This method creates a privilege if it does not exist.
+     *
+     * @param role the role associated with the privilege
+     * @param name the name of the privilege
+     */
     private void createPrivilegeIfNotFound(String role, String name) {
         privilegeService.createIfNotFound(role, name);
     }

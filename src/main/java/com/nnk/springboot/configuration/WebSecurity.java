@@ -16,21 +16,41 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/**
+ * WebSecurity is a configuration class that sets up the security configurations for the application.
+ * It enables web security and method level security, and provides beans for user details service, password encoder,
+ * authentication provider and security filter chain.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurity {
 
+    /**
+     * This method provides a bean for the user details service.
+     *
+     * @return a new instance of AppUserDetailsService
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return new AppUserDetailsService();
     }
 
+    /**
+     * This method provides a bean for the password encoder.
+     *
+     * @return a new instance of BCryptPasswordEncoder
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * This method provides a bean for the authentication provider.
+     *
+     * @return a new instance of DaoAuthenticationProvider configured with the user details service and password encoder
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -40,6 +60,14 @@ public class WebSecurity {
         return authProvider;
     }
 
+    /**
+     * This method provides a bean for the security filter chain.
+     * It configures the HTTP security including authorization of requests, form login, logout, HTTP Basic authentication, CSRF and headers.
+     *
+     * @param http the HttpSecurity to modify
+     * @return the SecurityFilterChain built from the HttpSecurity
+     * @throws Exception if an error occurs
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
