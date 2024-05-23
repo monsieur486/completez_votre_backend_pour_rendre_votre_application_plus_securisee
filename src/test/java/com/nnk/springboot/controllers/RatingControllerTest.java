@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import java.security.Principal;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,9 +25,6 @@ class RatingControllerTest {
 
     @Mock
     BindingResult bindingResult;
-
-    @Mock
-    Principal principal;
 
     @InjectMocks
     RatingController ratingController;
@@ -83,6 +79,22 @@ class RatingControllerTest {
         String result = ratingController.deleteRating(1, model);
         assertEquals("redirect:/rating/list", result);
         verify(ratingService, times(1)).deleteRatingById(any(Integer.class));
+    }
+
+    @Test
+    void validateWithErrors() {
+        Rating rating = new Rating();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = ratingController.validate(rating, bindingResult, model);
+        assertEquals("rating/add", result);
+    }
+
+    @Test
+    void updateRatingWithErrors() {
+        Rating rating = new Rating();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = ratingController.updateRating(1, rating, bindingResult, model);
+        assertEquals("rating/update", result);
     }
 
 }

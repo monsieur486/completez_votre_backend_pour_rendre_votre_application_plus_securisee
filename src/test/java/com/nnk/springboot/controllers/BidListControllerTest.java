@@ -85,4 +85,27 @@ class BidListControllerTest {
         verify(bidListService, times(1)).deleteBidList(any(Integer.class));
     }
 
+    @Test
+    void deleteBidException() {
+        String result = bidListController.deleteBid(1, model);
+        assertEquals("redirect:/bidList/list", result);
+        verify(bidListService, times(1)).deleteBidList(any(Integer.class));
+    }
+
+    @Test
+    void validateWithErrors() {
+        BidList bidList = new BidList();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = bidListController.validate(bidList, bindingResult, model, principal);
+        assertEquals("bidList/add", result);
+    }
+
+    @Test
+    void updateBidWithErrors() {
+        BidList bidList = new BidList();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = bidListController.updateBid(1, bidList, bindingResult, model, principal);
+        assertEquals("bidList/update", result);
+    }
+
 }

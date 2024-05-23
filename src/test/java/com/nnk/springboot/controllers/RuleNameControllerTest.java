@@ -85,4 +85,20 @@ class RuleNameControllerTest {
         verify(ruleNameService, times(1)).deleteRuleNameById(any(Integer.class));
     }
 
+    @Test
+    void validateWithErrors() {
+        RuleName ruleName = new RuleName();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = ruleNameController.validate(ruleName, bindingResult, model);
+        assertEquals("ruleName/add", result);
+    }
+
+    @Test
+    void updateRuleNameWithErrors() {
+        RuleName ruleName = new RuleName();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = ruleNameController.updateRuleName(1, ruleName, bindingResult, model);
+        assertEquals("ruleName/update", result);
+    }
+
 }

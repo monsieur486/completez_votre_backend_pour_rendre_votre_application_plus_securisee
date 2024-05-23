@@ -85,4 +85,22 @@ class TradeControllerTest {
         verify(tradeService, times(1)).deleteTradeById(any(Integer.class));
     }
 
+    @Test
+    void validateWithErrors() {
+        Trade trade = new Trade();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = tradeController.validate(trade, bindingResult, model, principal);
+        assertEquals("trade/add", result);
+    }
+
+    @Test
+    void updateTradeWithErrors() {
+        Trade trade = new Trade();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = tradeController.updateTrade(1, trade, bindingResult, model, principal);
+        assertEquals("trade/update", result);
+    }
+
+
+
 }

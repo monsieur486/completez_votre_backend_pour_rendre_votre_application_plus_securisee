@@ -96,4 +96,21 @@ class CurveControllerTest {
         verify(curvePointService, times(1)).deleteCurvePointById(1);
     }
 
+    @Test
+    void validateWithErrors() {
+        CurvePoint curvePoint = new CurvePoint();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = curveController.validate(curvePoint, bindingResult, model);
+        assertEquals("curvePoint/add", result);
+    }
+
+    @Test
+    void updateBidWithErrors() {
+        CurvePoint curvePoint = new CurvePoint();
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = curveController.updateBid(1, curvePoint, bindingResult, model);
+        assertEquals("curvePoint/update", result);
+    }
+
+
 }
