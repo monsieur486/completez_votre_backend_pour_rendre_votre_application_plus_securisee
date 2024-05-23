@@ -20,12 +20,4 @@ public class LoginController {
         mav.setViewName("login");
         return mav;
     }
-
-/*    @GetMapping("secure/article-details")
-    public ModelAndView getAllUserArticles() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("users", userRepository.findAll());
-        mav.setViewName("user/list");
-        return mav;
-    }*/
 }
