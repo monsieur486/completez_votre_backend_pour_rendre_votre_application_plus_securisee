@@ -31,10 +31,6 @@ public class RatingService {
         ratingRepository.deleteById(id);
     }
 
-    public boolean existsById(Integer id) {
-        return ratingRepository.existsById(id);
-    }
-
     public void updateRating(Rating rating) {
         ratingRepository.save(rating);
     }
