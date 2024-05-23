@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import java.security.Principal;
 import java.util.Collections;
@@ -68,6 +69,16 @@ class UserControllerTest {
     }
 
     @Test
+    void validateWithErrors() {
+        User user = new User();
+        user.setUsername("TestUser");
+        user.setPassword("**");
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = userController.validate(user, bindingResult, model);
+        assertEquals("user/add", result);
+    }
+
+    @Test
     void showUpdateForm() {
         User user = new User();
         when(userService.findById(any(Integer.class))).thenReturn(user);
@@ -88,6 +99,16 @@ class UserControllerTest {
         String result = userController.updateUser(1, user, bindingResult, principal, model);
         assertEquals("redirect:/user/list", result);
         verify(userService, times(1)).save(any(User.class));
+    }
+
+    @Test
+    void updateUserWithErrors() {
+        User user = new User();
+        user.setUsername("TestUser");
+        user.setPassword("**");
+        when(bindingResult.hasErrors()).thenReturn(true);
+        String result = userController.updateUser(1, user, bindingResult, principal, model);
+        assertEquals("user/update", result);
     }
 
     @Test

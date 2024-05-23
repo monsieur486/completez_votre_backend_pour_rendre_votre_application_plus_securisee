@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collections;
 import java.util.List;
@@ -68,6 +69,17 @@ class PrivilegeServiceTest {
         Privilege privilege = new Privilege();
         privilegeService.updatePrivilege(privilege);
         verify(privilegeRepository, times(1)).save(any(Privilege.class));
+    }
+
+    @Test
+    void getAuthorityByRole() {
+        List<Privilege> privileges = List.of(new Privilege("role", "name"));
+        when(privilegeRepository.findByRole("role")).thenReturn(privileges);
+
+        List<GrantedAuthority> result = privilegeService.getAuthorityByRole("role");
+
+        assertEquals(2, result.size());
+        verify(privilegeRepository, times(1)).findByRole("role");
     }
 
 }
