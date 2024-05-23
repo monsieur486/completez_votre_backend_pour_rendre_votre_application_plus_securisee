@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * The type Rule name.
+ */
 @Entity
 @Getter
 @Setter
@@ -43,6 +46,16 @@ public class RuleName {
     @NotBlank(message = "Sql Part is mandatory")
     private String sqlPart;
 
+    /**
+     * Instantiates a new Rule name.
+     *
+     * @param ruleName    the rule name
+     * @param description the description
+     * @param json        the json
+     * @param template    the template
+     * @param sql         the sql
+     * @param sqlPart     the sql part
+     */
     public RuleName(String ruleName, String description, String json, String template, String sql, String sqlPart) {
         this.name = ruleName;
         this.description = description;

@@ -5,15 +5,26 @@ import com.nnk.springboot.services.RuleNameService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Install rule name fixture.
+ */
 @Component
 @Slf4j
 public class InstallRuleNameFixture {
     private final RuleNameService ruleNameService;
 
+    /**
+     * Instantiates a new Install rule name fixture.
+     *
+     * @param ruleNameService the rule name service
+     */
     public InstallRuleNameFixture(RuleNameService ruleNameService) {
         this.ruleNameService = ruleNameService;
     }
 
+    /**
+     * Execute.
+     */
     public void execute() {
         log.warn("Creating fixtures for RuleName");
         ruleNameService.saveRuleName(new RuleName("Rule Name Test", "Description Test", "Json Test", "Template Test", "SQL Test", "SQL Part Test"));

@@ -11,6 +11,9 @@ import org.hibernate.validator.constraints.Range;
 
 import java.sql.Timestamp;
 
+/**
+ * The type Bid list.
+ */
 @Entity
 @Getter
 @Setter
@@ -86,6 +89,13 @@ public class BidList {
     @Column(length = 125)
     private String side;
 
+    /**
+     * Instantiates a new Bid list.
+     *
+     * @param accountTest the account test
+     * @param account     the account
+     * @param bidQuantity the bid quantity
+     */
     public BidList(String accountTest, String account, double bidQuantity) {
         this.account = accountTest;
         this.type = account;

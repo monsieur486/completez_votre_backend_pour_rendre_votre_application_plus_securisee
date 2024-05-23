@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
+/**
+ * The type Rating.
+ */
 @Entity
 @Getter
 @Setter
@@ -37,6 +40,14 @@ public class Rating {
     @NotNull(message = "must not be null")
     private Integer orderNumber;
 
+    /**
+     * Instantiates a new Rating.
+     *
+     * @param moodysRating the moodys rating
+     * @param sandPRating  the sand p rating
+     * @param fitchRating  the fitch rating
+     * @param orderNumber  the order number
+     */
     public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
         this.moodysRating = moodysRating;
         this.sandPRating = sandPRating;

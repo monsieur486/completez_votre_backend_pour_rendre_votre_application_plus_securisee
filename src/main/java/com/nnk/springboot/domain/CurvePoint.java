@@ -11,6 +11,9 @@ import org.hibernate.validator.constraints.Range;
 
 import java.sql.Timestamp;
 
+/**
+ * The type Curve point.
+ */
 @Entity
 @Getter
 @Setter
@@ -38,6 +41,13 @@ public class CurvePoint {
     @CreationTimestamp
     private Timestamp creationDate;
 
+    /**
+     * Instantiates a new Curve point.
+     *
+     * @param curveId the curve id
+     * @param term    the term
+     * @param value   the value
+     */
     public CurvePoint(int curveId, double term, double value) {
         this.curveId = curveId;
         this.term = term;

@@ -14,26 +14,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
+/**
+ * The type Trade controller.
+ */
 @Controller
 public class TradeController {
     private final TradeService tradeService;
 
+    /**
+     * Instantiates a new Trade controller.
+     *
+     * @param tradeService the trade service
+     */
     public TradeController(TradeService tradeService) {
         this.tradeService = tradeService;
     }
 
+    /**
+     * Home string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping("/trade/list")
     public String home(Model model) {
         model.addAttribute("trades", tradeService.findAllTrades());
         return "trade/list";
     }
 
+    /**
+     * Add user string.
+     *
+     * @param bid the bid
+     * @return the string
+     */
     @GetMapping("/trade/add")
     @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String addUser(Trade bid) {
         return "trade/add";
     }
 
+    /**
+     * Validate string.
+     *
+     * @param trade     the trade
+     * @param result    the result
+     * @param model     the model
+     * @param principal the principal
+     * @return the string
+     */
     @PostMapping("/trade/validate")
     @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String validate(@Valid Trade trade, BindingResult result, Model model, Principal principal) {
@@ -48,6 +77,13 @@ public class TradeController {
         return "trade/list";
     }
 
+    /**
+     * Show update form string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/trade/update/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
@@ -56,6 +92,16 @@ public class TradeController {
         return "trade/update";
     }
 
+    /**
+     * Update trade string.
+     *
+     * @param id        the id
+     * @param trade     the trade
+     * @param result    the result
+     * @param model     the model
+     * @param principal the principal
+     * @return the string
+     */
     @PostMapping("/trade/update/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
@@ -72,6 +118,13 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
+    /**
+     * Delete trade string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/trade/delete/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {

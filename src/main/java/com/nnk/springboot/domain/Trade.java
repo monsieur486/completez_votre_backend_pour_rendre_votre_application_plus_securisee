@@ -11,6 +11,9 @@ import lombok.Setter;
 import java.sql.Timestamp;
 
 
+/**
+ * The type Trade.
+ */
 @Entity
 @Getter
 @Setter
@@ -82,6 +85,13 @@ public class Trade {
     @Column(length = 125)
     private String side;
 
+    /**
+     * Instantiates a new Trade.
+     *
+     * @param tradeAccount the trade account
+     * @param type         the type
+     * @param buyQuantity  the buy quantity
+     */
     public Trade(String tradeAccount, String type, Double buyQuantity) {
         this.account = tradeAccount;
         this.type = type;

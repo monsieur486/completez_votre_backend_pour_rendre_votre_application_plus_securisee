@@ -3,9 +3,15 @@ package com.nnk.springboot.tools;
 import com.nnk.springboot.configuration.ApplicationConfiguration;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Password validation.
+ */
 @Component
 public class PasswordValidation {
 
+    /**
+     * Instantiates a new Password validation.
+     */
     public PasswordValidation() {
     }
 

@@ -12,28 +12,56 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * The type Rating controller.
+ */
 @Controller
 public class RatingController {
 
     private final RatingService ratingService;
 
+    /**
+     * Instantiates a new Rating controller.
+     *
+     * @param ratingService the rating service
+     */
     public RatingController(RatingService ratingService) {
         this.ratingService = ratingService;
     }
 
 
+    /**
+     * Home string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping("/rating/list")
     public String home(Model model) {
         model.addAttribute("ratings", ratingService.findAllRatings());
         return "rating/list";
     }
 
+    /**
+     * Add rating form string.
+     *
+     * @param rating the rating
+     * @return the string
+     */
     @GetMapping("/rating/add")
     @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String addRatingForm(Rating rating) {
         return "rating/add";
     }
 
+    /**
+     * Validate string.
+     *
+     * @param rating the rating
+     * @param result the result
+     * @param model  the model
+     * @return the string
+     */
     @PostMapping("/rating/validate")
     @PreAuthorize("hasAuthority('ADD_PRIVILEGE')")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
@@ -47,6 +75,13 @@ public class RatingController {
         return "rating/add";
     }
 
+    /**
+     * Show update form string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/rating/update/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
@@ -57,6 +92,15 @@ public class RatingController {
         return "rating/update";
     }
 
+    /**
+     * Update rating string.
+     *
+     * @param id     the id
+     * @param rating the rating
+     * @param result the result
+     * @param model  the model
+     * @return the string
+     */
     @PostMapping("/rating/update/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE')")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
@@ -74,6 +118,13 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Delete rating string.
+     *
+     * @param id    the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/rating/delete/{id}")
     @PreAuthorize("hasAuthority('DELETE_PRIVILEGE')")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {

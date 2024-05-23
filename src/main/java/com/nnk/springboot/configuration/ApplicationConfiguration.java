@@ -2,7 +2,6 @@ package com.nnk.springboot.configuration;
 
 /**
  * ApplicationConfiguration is a configuration class that holds constants related to application configuration.
- *
  */
 public class ApplicationConfiguration {
 

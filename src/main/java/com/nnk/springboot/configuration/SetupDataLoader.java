@@ -28,12 +28,21 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private final InstallRuleNameFixture installRuleNameFixture;
     private final InstallTradeFixture installTradeFixture;
 
+    /**
+     * The Admin username.
+     */
     @Value("${ADMIN_USERNAME}")
     public String adminUsername;
 
+    /**
+     * The Admin fullname.
+     */
     @Value("${ADMIN_FULLNAME}")
     public String adminFullname;
 
+    /**
+     * The Admin password.
+     */
     @Value("${ADMIN_PASSWORD}")
     public String adminPassword;
 
@@ -42,6 +51,17 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     private boolean alreadySetup = false;
 
+    /**
+     * Instantiates a new Setup data loader.
+     *
+     * @param userService              the user service
+     * @param privilegeService         the privilege service
+     * @param installBidListFixture    the install bid list fixture
+     * @param installCurvePointFixture the install curve point fixture
+     * @param installRatingFixture     the install rating fixture
+     * @param installRuleNameFixture   the install rule name fixture
+     * @param installTradeFixture      the install trade fixture
+     */
     public SetupDataLoader(UserService userService, PrivilegeService privilegeService, InstallBidListFixture installBidListFixture, InstallCurvePointFixture installCurvePointFixture, InstallRatingFixture installRatingFixture, InstallRuleNameFixture installRuleNameFixture, InstallTradeFixture installTradeFixture) {
         this.userService = userService;
         this.privilegeService = privilegeService;

@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type User dto.
+ */
 @Component
 @Data
 @NoArgsConstructor
