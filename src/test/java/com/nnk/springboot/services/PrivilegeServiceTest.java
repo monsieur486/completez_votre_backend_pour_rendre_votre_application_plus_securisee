@@ -2,6 +2,7 @@ package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.Privilege;
 import com.nnk.springboot.repositories.PrivilegeRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,6 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -80,5 +82,53 @@ class PrivilegeServiceTest {
         assertEquals(2, result.size());
         verify(privilegeRepository, times(1)).findByRole("role");
     }
+
+    @Test
+    void createIfNotFound() {
+        when(privilegeRepository.existsByRoleAndName("role", "name")).thenReturn(false);
+
+        privilegeService.createIfNotFound("role", "name");
+
+        verify(privilegeRepository, times(1)).save(any(Privilege.class));
+    }
+
+    @Test
+    void createIfFound() {
+        when(privilegeRepository.existsByRoleAndName("role", "name")).thenReturn(true);
+
+        privilegeService.createIfNotFound("role", "name");
+
+        verify(privilegeRepository, never()).save(any(Privilege.class));
+    }
+
+    @Test
+    void testGetAuthorityByRole_NoPrivileges() {
+        when(privilegeRepository.findByRole("role")).thenReturn(Collections.emptyList());
+
+        List<GrantedAuthority> result = privilegeService.getAuthorityByRole("role");
+
+        assertEquals(1, result.size()); // Only the role itself is returned
+        verify(privilegeRepository, times(1)).findByRole("role");
+    }
+
+    @Test
+    void testCreateIfNotFound_AlreadyExists() {
+        when(privilegeRepository.existsByRoleAndName("role", "name")).thenReturn(true);
+
+        privilegeService.createIfNotFound("role", "name");
+
+        verify(privilegeRepository, never()).save(any(Privilege.class)); // The privilege is not saved because it already exists
+    }
+
+    @Test
+    void testFindPrivilegeById_NotFound() {
+        when(privilegeRepository.findById(any(Integer.class))).thenReturn(Optional.empty());
+
+        Privilege result = privilegeService.findPrivilegeById(1);
+
+        Assertions.assertNull(result); // The privilege is not found
+        verify(privilegeRepository, times(1)).findById(any(Integer.class));
+    }
+
 
 }
