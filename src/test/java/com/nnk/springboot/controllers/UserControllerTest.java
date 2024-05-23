@@ -121,4 +121,39 @@ class UserControllerTest {
         verify(userService, times(1)).delete(any(User.class));
     }
 
+    @Test
+    void deleteUserWithErrors() {
+        User user = new User();
+        user.setUsername("TestUser");
+        user.setPassword("TestPassword123!");
+        when(userService.findById(any(Integer.class))).thenReturn(user);
+        when(principal.getName()).thenReturn("TestUser");
+        String result = userController.deleteUser(1, model, principal);
+        assertEquals("user/list", result);
+        verify(userService, times(0)).delete(any(User.class));
+    }
+
+    @Test
+    void updateUserWithErrors2() {
+        User user = new User();
+        user.setUsername("TestUser");
+        user.setPassword("TestPassword123!");
+        when(userService.findById(any(Integer.class))).thenReturn(user);
+        when(principal.getName()).thenReturn("TestUser");
+        String result = userController.updateUser(1, user, bindingResult, principal, model);
+        assertEquals("user/list", result);
+        verify(userService, times(0)).save(any(User.class));
+    }
+
+    @Test
+    void validateUserWithBigPassword() {
+        User user = new User();
+        user.setUsername("TestUser");
+        user.setPassword("012345678901234567890123456789012345678901234567890");
+        when(bindingResult.hasErrors()).thenReturn(false);
+        String result = userController.validate(user, bindingResult, model);
+        assertEquals("redirect:/user/list", result);
+    }
+
+
 }
